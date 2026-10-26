@@ -94,14 +94,15 @@ nav a:hover,
 }
 
 .hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(24, 19, 16, 0.94) 0%,
-    rgba(24, 19, 16, 0.73) 44%,
-    rgba(24, 19, 16, 0.12) 100%
-  );
+ 
+.hero {
+  position: relative;
+  min-height: 680px;
+  background:
+    linear-gradient(rgba(25, 20, 17, 0.45), rgba(25, 20, 17, 0.45)),
+    url("images/jewelry.jpg") center / cover no-repeat;
+}
+
 }
 
 .hero-content {
