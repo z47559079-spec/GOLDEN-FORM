@@ -120,5 +120,29 @@
       <p class="copyright">© 2026 GOLDEN FORM</p>
     </footer>
   </main>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const button = document.getElementById("language-toggle");
+  let lang = "en";
+
+  button.addEventListener("click", function () {
+    lang = lang === "en" ? "fa" : "en";
+
+    document.documentElement.lang = lang;
+    document.documentElement.dir =
+      lang === "fa" ? "rtl" : "ltr";
+
+    document.querySelectorAll("[data-en][data-fa]").forEach(function (el) {
+      el.textContent =
+        lang === "fa" ? el.getAttribute("data-fa") :
+        el.getAttribute("data-en");
+    });
+
+    button.textContent =
+      lang === "fa" ? "English" : "فارسی";
+  });
+});
+</script>
 </body>
 </html>
