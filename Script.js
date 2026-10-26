@@ -1,44 +1,36 @@
 
 const languageButton = document.getElementById("language-toggle");
 
-function setLanguage(language) {
-  const isPersian = language === "fa";
+function setLanguage(lang) {
+  const isFa = lang === "fa";
 
-  document.documentElement.lang = language;
-  document.documentElement.dir = isPersian ? "rtl" : "ltr";
+  document.documentElement.lang = lang;
+  document.documentElement.dir = isFa ? "rtl" : "ltr";
 
-  document.querySelectorAll("[data-en][data-fa]").forEach((element) => {
-    element.textContent = isPersian
-      ? element.dataset.fa
-      : element.dataset.en;
+  document.querySelectorAll("[data-en][data-fa]").forEach((el) => {
+    el.textContent = isFa ? el.dataset.fa : el.dataset.en;
   });
 
-  languageButton.textContent = isPersian
-    ? "EN / English"
-    : "FA / فارسی";
+  if (languageButton) {
+    languageButton.textContent = isFa ? "EN / English" : "FA / فارسی";
+  }
 
-  document.title = isPersian
-    ? "گلدن فرم | آتلیه طراحی زیورآلات"
-    : "GOLDEN FORM | Jewelry Design Atelier";
+  document.title = isFa
+    ? "گلدن فرم | طراحی زیورآلات"
+    : "GOLDEN FORM | Jewelry Design";
 
   try {
-    localStorage.setItem("golden-form-language", language);
-  } catch (error) {
-    // The site still works if browser storage is unavailable.
-  }
+    localStorage.setItem("golden-form-language", lang);
+  } catch (e) {}
 }
 
-languageButton.addEventListener("click", () => {
-  const currentLanguage = document.documentElement.lang;
-  setLanguage(currentLanguage === "fa" ? "en" : "fa");
-});
+if (languageButton) {
+  languageButton.addEventListener("click", () => {
+    const nextLang =
+      document.documentElement.lang === "fa" ? "en" : "fa";
 
-let savedLanguage = "en";
-
-try {
-  savedLanguage = localStorage.getItem("golden-form-language") || "en";
-} catch (error) {
-  // Use English as the default.
+    setLanguage(nextLang);
+  });
 }
 
-setLanguage(savedLanguage);
+setLanguage("en");
